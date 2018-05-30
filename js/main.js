@@ -1,14 +1,15 @@
-let monthBudget,
-	shopName,
-	mainList = {
-		budget: 100,
-		shopName: '',
+let monthBudget = prompt("Ваш бюджет на месяц?"),
+	shopName = prompt("Название вашего магазина");
+
+let	mainList = {
+		budget: monthBudget,
+		shopName: shopName,
 		shopGoods: [],
 		employers: {},
 		open: true
 	}
-	
-let shopGoods = Array(
+
+mainList.shopGoods = Array(
 		prompt("Какой тип товаров будем продавать?"), 
 		prompt("Какой еще тип товаров будем продавать?"), 
 		prompt("Какой еще тип товаров будем продавать?")
