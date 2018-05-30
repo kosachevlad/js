@@ -7,9 +7,7 @@ let monthBudget,
 		employers: {},
 		open: true
 	}
-
-
-
+	
 let shopGoods = Array(
 		prompt("Какой тип товаров будем продавать?"), 
 		prompt("Какой еще тип товаров будем продавать?"), 
