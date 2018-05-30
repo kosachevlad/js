@@ -15,5 +15,5 @@ mainList.shopGoods = Array(
 		prompt("Какой еще тип товаров будем продавать?")
 	);
 
-alert(monthBudget / 30);
+alert('Бюджет на 1 день = ' + monthBudget / 30);
 
