@@ -113,6 +113,11 @@ body {
 .main-info .isopen-value,
 .main-info .discount-value {
   background-color: red;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
 }
 .main-functions {
   width: 550px;
@@ -173,4 +178,7 @@ body {
   display: block;
   margin: 0 auto;
   margin-top: 10px;
+}
+.green{
+  background-color: green !important;
 }
