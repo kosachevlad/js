@@ -39,9 +39,13 @@ let mainList = {
 }
 
 // Конец
-// 
 
 open.addEventListener('click', () => {
+	setTimeout(start, 2000);
+});
+
+function start() {
+
 	monthBudget = prompt("Ваш бюджет", '');
 
 	while (isNaN(monthBudget) || monthBudget == "" || monthBudget == null) {
@@ -75,9 +79,7 @@ open.addEventListener('click', () => {
 				}
 		});
 	};
-
-});
-
+}
 
 goodsBtn.addEventListener('click', () => {
 

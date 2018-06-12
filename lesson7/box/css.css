@@ -1,0 +1,31 @@
+.btn{
+	background: yellow;
+	border: none;
+	padding: 10px;
+}
+.wrapper{
+	width: 400px;
+	height: 400px;
+	border: 2px solid red;
+	position: relative;
+}
+.box{
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	background: blue;
+}
+.btn-block{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	background: grey;
+	padding: 20px;
+}
+.btn-block button{
+	background: yellow;
+	height: 30px;
+	width: 100px;
+}
