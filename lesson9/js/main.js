@@ -1,20 +1,41 @@
-function User(name, id) {
-	this.name = name;
-	this.id = id;
-	this.human = true;
-	this.hello = function(){
-		alert("Hello " + this.name);
-	}
-};
+let age = document.getElementById('age');
 
-User.prototype.exit = function(name) {
-	alert("Пользователь " + this.name + " ушел");
+function showUser(surname, name) {
+	this.value = age.value;
+	alert("Пользователь " + surname + " " + name + ", его возраст " + this.value);
 }
 
-let ivan = new User('Ivan', 23);
-let alex = new User('Alex', 20);
+showUser('asd', 'as');
 
-console.log(ivan, alex)
+// let user = {
+// 	name: 'John'
+// };
+
+// function sayName(surname) {
+// 	console.log(this);
+// 	console.log(this.name + surname);
+// };
+
+// console.log(sayName.call(user, 'Smith'));
+// console.log(sayName.apply(user, ['Snow']));
+
+// function User(name, id) {
+// 	this.name = name;
+// 	this.id = id;
+// 	this.human = true;
+// 	this.hello = function(){
+// 		alert("Hello " + this.name);
+// 	}
+// };
+
+// User.prototype.exit = function(name) {
+// 	alert("Пользователь " + this.name + " ушел");
+// }
+
+// let ivan = new User('Ivan', 23);
+// let alex = new User('Alex', 20);
+
+// console.log(ivan, alex)
 
 // ivan.exit();
 
