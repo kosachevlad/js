@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', () => {
 
 	let tab = document.getElementsByClassName('info-header-tab'),
 		tabContent = document.getElementsByClassName('info-tabcontent'),
@@ -21,7 +21,7 @@ window.addEventListener('DOMContentLoaded', function() {
 		}
 	}
 
-	info.addEventListener('click', function(event){
+	info.addEventListener('click', (event) => {
 		let target = event.target;
 		if(target.className == 'info-header-tab') {
 			for (let i = 0; i < tab.length; i++) {
@@ -36,7 +36,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 // Timer
 
-	let = deadline = '2018-06-17';
+	let = deadline = '2018-06-18';
 	let timeInterval = null;
 
 	function getTimeRemaining(endtime) {
@@ -73,13 +73,13 @@ window.addEventListener('DOMContentLoaded', function() {
 				t.seconds = String(t.seconds);
 
 				if(t.hours.length == 1) {
-					t.hours = '0' + t.hours;
+					t.hours = `0${t.hours}`;
 				};
 				if(t.minutes.length == 1) {
-					t.minutes = '0' + t.minutes;
+					t.minutes = `0${t.minutes}`;
 				};
 				if(t.seconds.length == 1) {
-					t.seconds = '0' + t.seconds;
+					t.seconds = `0${t.seconds}`;
 				}
 
 				hours.innerHTML = t.hours;
@@ -105,69 +105,35 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	// плавная прокрутка
 
-	let aboutBtn = document.getElementsByTagName('a')[0],
-		photoBtn = document.getElementsByTagName('a')[1],
-		priceBtn = document.getElementsByTagName('a')[2],
-		contactsBtn = document.getElementsByTagName('a')[3];
-	
-	aboutBtn.addEventListener('click', function(event){
+	function animate(draw, duration) {
+		let start = performance.now();
+
+		requestAnimationFrame( function animate( time ) {
+			let timePassed = time - start;
+
+			if (timePassed > duration) {
+				timepassed = duration;
+			}
+			draw(timePassed);
+
+			if ( timePassed < duration) {
+				requestAnimationFrame( animate );
+			}
+		})
+	}
+
+	let navigation = document.getElementsByTagName('nav')[0];
+
+	navigation.addEventListener('click', (event) => {
 		event.preventDefault();
-		pos = 0,
-	   	id = setInterval(frame, 10);
 
-		 	function frame() {
-	  			if (pos == 600) {
-	  				clearInterval(id);
-	  			} else {
-	  				pos = pos+10;
-	  				window.scrollTo(0, pos);
-	  			}
-	  		}
-	});
+		animate(function(timePassed){
+			let target = event.target,
+				section = document.getElementById( target.getAttribute('href').slice(1) );
 
-	photoBtn.addEventListener('click', function(event){
-		event.preventDefault();
-		pos = 0,
-	   	id = setInterval(frame, 10);
+			window.scrollBy( 0, section.getBoundingClientRect().top / 20 - 5);
 
-		 	function frame() {
-	  			if (pos == 1850) {
-	  				clearInterval(id);
-	  			} else {
-	  				pos = pos+25;
-	  				window.scrollTo(0, pos);
-	  			}
-	  		}
-	});
-
-	priceBtn.addEventListener('click', function(event){
-		event.preventDefault();
-		pos = 0,
-	   	id = setInterval(frame, 10);
-
-		 	function frame() {
-	  			if (pos == 4600) {
-	  				clearInterval(id);
-	  			} else {
-	  				pos = pos+50;
-	  				window.scrollTo(0, pos);
-	  			}
-	  		}
-	});
-
-	contactsBtn.addEventListener('click', function(event){
-		event.preventDefault();
-		pos = 0,
-	   	id = setInterval(frame, 10);
-
-		 	function frame() {
-	  			if (pos == 5200) {
-	  				clearInterval(id);
-	  			} else {
-	  				pos = pos+50;
-	  				window.scrollTo(0, pos);
-	  			}
-	  		}
+		}, 1500);
 	});
 
 	// Modal
@@ -182,7 +148,7 @@ window.addEventListener('DOMContentLoaded', function() {
 		overlay.style.display = 'block';
 		document.body.style.overflow = 'hidden';
 	});
-	close.addEventListener('click', function() {
+	close.addEventListener('click', () => {
 		overlay.style.display = "none";
 		more.classList.remove('more-splash');
 		document.body.style.overflow = '';
@@ -194,4 +160,31 @@ window.addEventListener('DOMContentLoaded', function() {
 			document.body.style.overflow = 'hidden';
 		});
 	}
+
+	// Класс
+
+	class Options {
+		constructor (height, width, bg, fontSize, textAlign) {
+			this.height = height;
+			this.width = width;
+			this.bg = bg;
+			this.fontSize = fontSize;
+			this.textAlign = textAlign;
+		}
+		createNewDiv(text) {
+			let div = document.createElement('div');
+			div.textContent = text;
+
+			div.style.cssText = `height: ${this.height};
+								width: ${this.width};
+								background-color: ${this.bg};
+								font-size: ${this.fontSize};
+								text-align: ${this.textAlign}`
+			document.body.appendChild(div);
+		}
+	}
+	let obj = new Options('200px', '200px', 'red', '14px', 'center');
+	obj.createNewDiv('Hello World!');
+	let objSecond = new Options('400px', '300px', 'green', '20px', 'right');
+	objSecond.createNewDiv('Hi Everyone');
 });
