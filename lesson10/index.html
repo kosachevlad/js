@@ -5,7 +5,33 @@
 	<title>Document</title>
 </head>
 <body>
+	<div class="elem" >
+		<input type="text">
+		<form action="index.html
+		"></form>
+	</div>
+	<form action="#" class="second">
+		<div class="ac">
+			
+		</div>
+	</form>
+	<a href="http://site.com">Текст ссылки</a>
+	<!-- <p id="elem">Привет!</p> -->
+	<a id="outer" href="http://site.com">
+	  <em id="inner">Текст ссылки</em>
+	</a>
+	<form action="#" class="third"></form>
+	<div id="elem" test="5">
 	<button class="btn" >Press</button>
+	<script>
+		// inner.onclick = function(e) { e.preventDefault(); }
+		let elem  = document.getElementById('elem');
+		elem.textContent = elem.outerHTML
+		elem.onclick = function(event) {
+		  console.log(this)
+		}
+	</script>
 	<script src="js/main.js"></script>
+	
 </body>
 </html>

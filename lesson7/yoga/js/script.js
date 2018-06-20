@@ -161,30 +161,49 @@ window.addEventListener('DOMContentLoaded', () => {
 		});
 	}
 
-	// Класс
+	// Form
+	let message = new Object();
+	message.loading = "Загрузка...";
+	message.success = "Спасибо! Скоро свяжемся...";
+	message.failure = "Что-то пошло не так...";
 
-	class Options {
-		constructor (height, width, bg, fontSize, textAlign) {
-			this.height = height;
-			this.width = width;
-			this.bg = bg;
-			this.fontSize = fontSize;
-			this.textAlign = textAlign;
-		}
-		createNewDiv(text) {
-			let div = document.createElement('div');
-			div.textContent = text;
+	let form = document.getElementsByClassName('main-form')[0],
+		input = form.getElementsByTagName('input'),
+		statusMessage = document.createElement('div');
+		statusMessage.classList.add('status');
 
-			div.style.cssText = `height: ${this.height};
-								width: ${this.width};
-								background-color: ${this.bg};
-								font-size: ${this.fontSize};
-								text-align: ${this.textAlign}`
-			document.body.appendChild(div);
-		}
-	}
-	let obj = new Options('200px', '200px', 'red', '14px', 'center');
-	obj.createNewDiv('Hello World!');
-	let objSecond = new Options('400px', '300px', 'green', '20px', 'right');
-	objSecond.createNewDiv('Hi Everyone');
+		form.addEventListener('submit', function(event) {
+			event.preventDefault();
+			form.appendChild(statusMessage);
+
+			// AJAX
+			let request = new XMLHttpRequest();
+			request.open("POST", 'server.php')
+
+			request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+			let formData = new FormData(form);
+
+			request.send(formData);
+
+			request.onreadystatechange = function() {
+				if (request.readyState < 4) {
+					statusMessage.innerHTML = message.loading;
+				} else if (request.readyState === 4) {
+					if (request.status == 200 && request.status < 300) {
+						statusMessage.innerHTML = message.success;
+						// Добавляем контент на страницу
+
+					}
+					else {
+						statusMessage.innerHTML = message.failure;
+					}
+				}
+			}
+			for (let i = 0; i < input.length; i++) {
+				input[i].value = '';
+				// очищаем поля ввода
+			}
+		});
+
 });
