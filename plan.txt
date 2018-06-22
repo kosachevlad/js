@@ -1,0 +1,17 @@
+План по Ангуляр:
+1) nodeJS - > npm
+2) TypeScript
+3) Webpack
+4) Модель-представление-контролер MVC
+5) Angular
+
+План по React
+
+1) babel
+2) Препроцессор JSX
+3) Webpack
+4) React
+
+План по Vue.js
+
+1) 

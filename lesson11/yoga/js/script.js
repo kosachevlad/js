@@ -320,7 +320,15 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		totalValue.innerHTML = 0;
 
-		
+		function check(elem) {
+			elem.addEventListener('keyup', function(){
+				this.value = this.value.replace(/[^\d]/, '').substr(0,2);
+
+			});
+			
+		};
+		check(persons);
+			check(restDays);
 
 		persons.addEventListener('change', function() {
 			personsSum = +this.value;
@@ -365,45 +373,46 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		// Отменить другие символы кроме цифр
 		
-		persons.onkeypress = function(e) {
-			  e = e || event;
+		// persons.onkeypress = function(e) {
+		// 	  e = e || event;
+		// 	  if (e.ctrlKey || e.altKey || e.metaKey) return;
 
-			  if (e.ctrlKey || e.altKey || e.metaKey) return;
+		// 	  let chr = getChar(e);
 
-			  let chr = getChar(e);
+		// 	  if (chr == null) return;
 
-			  if (chr == null) return;
+		// 	  if (chr < '0' || chr > '9') {
+		// 	    return false;
+		// 	  }
+		// };
 
-			  if (chr < '0' || chr > '9') {
-			    return false;
-			  }
-		};
+		// restDays.onkeypress = function(e) {
+		// 	  e = e || event;
 
-		restDays.onkeypress = function(e) {
-			  e = e || event;
+		// 	  if (e.ctrlKey || e.altKey || e.metaKey) return;
 
-			  if (e.ctrlKey || e.altKey || e.metaKey) return;
+		// 	  let chr = getChar(e);
 
-			  let chr = getChar(e);
+		// 	  if (chr == null) return;
 
-			  if (chr == null) return;
+		// 	  if (chr < '0' || chr > '9') {
+		// 	    return false;
+		// 	  }
+		// };
 
-			  if (chr < '0' || chr > '9') {
-			    return false;
-			  }
-		};
+		// function getChar(event) {
+		//      if (event.which == null) {
+		//        if (event.keyCode < 32) return null;
+		//        return String.fromCharCode(event.keyCode) // IE
+		//      }
 
-		function getChar(event) {
-		     if (event.which == null) {
-		       if (event.keyCode < 32) return null;
-		       return String.fromCharCode(event.keyCode) // IE
-		     }
+		//      if (event.which != 0 && event.charCode != 0) {
+		//        if (event.which < 32) return null;
+		//        return String.fromCharCode(event.which) // остальные
+		//      }
 
-		     if (event.which != 0 && event.charCode != 0) {
-		       if (event.which < 32) return null;
-		       return String.fromCharCode(event.which) // остальные
-		     }
+		//      return null; // специальная клавиша
+		//    };
 
-		     return null; // специальная клавиша
-		   };
+		
 });
