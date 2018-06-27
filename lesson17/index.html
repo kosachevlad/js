@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/slick.css">
+	<title>Lesson 17</title>
+</head>
+<body>
+	<div id="tabs">
+		<ul class="steps-header">
+	        <li class="tab whiteborder">01</li>
+	        <li class="tab">02</li>
+	        <li class="tab">03</li>
+	    </ul>
+	    <div class="container">
+	    	<div class="tabContent">
+	    		<div class="slider">
+	    			<div class="slider-item">
+	    				<img src="img/event-photo-6.jpg" alt="">
+	    			</div>
+	    			<div class="slider-item">
+	    				<img src="img/event-photo-7.jpg" alt="">
+	    			</div>
+	    			<div class="slider-item">
+	    				<img src="img/event-photo-8.jpg" alt="">
+	    			</div>
+	    			<div class="slider-item">
+	    				<img src="img/event-photo-9.jpg" alt="">
+	    			</div>
+	    			<div class="slider-item">
+	    				<img src="img/event-photo-6.jpg" alt="">
+	    			</div>
+	    			<div class="slider-item">
+	    				<img src="img/event-photo-7.jpg" alt="">
+	    			</div>
+	    			<div class="slider-item">
+	    				<img src="img/event-photo-8.jpg" alt="">
+	    			</div>
+	    			<div class="slider-item">
+	    				<img src="img/event-photo-9.jpg" alt="">
+	    			</div>
+	    			<div class="slider-item">
+	    				<img src="img/event-photo-6.jpg" alt="">
+	    			</div>
+	    			<div class="slider-item">
+	    				<img src="img/event-photo-7.jpg" alt="">
+	    			</div>
+	    			<div class="slider-item">
+	    				<img src="img/event-photo-8.jpg" alt="">
+	    			</div>
+	    			<div class="slider-item">
+	    				<img src="img/event-photo-9.jpg" alt="">
+	    			</div>
+	    		</div>
+	    	</div>
+	    	<div class="tabContent">
+	    	     <div class="init">
+	    	         <div class="center1">
+	    	             <h1>WE NEED YOU!</h1>
+	    	             <p>Click on each square to plant a tree. You must hurry or the factories will colonize us!</p>
+	    	             <p class="floating bold">START GAME</p>
+	    	         </div>
+	    	     </div>
+	    	     <div class="won">
+	    	         <div class="center">
+	    	             <h1>YOU WON!</h1>
+	    	             <p class="floating replay bold">save the World again</p>
+	    	         </div>
+	    	     </div>
+	    	     <div class="init hidden"><h1 class="center">INCREASED VELOCITY!</h1></div>
+	    	    <!-- <h2 class="counter">Level: 1</h2> -->
+	    	     <div class="container">
+	    	         <div class="game"></div>
+	    	     </div>  
+	    	</div>
+	    	<div class="tabContent">
+	    		<div class="d-flex">
+	    			<a href="#" class='btn open-modal' data-modal="#modal1">Open Modal</a>
+
+	    			<div class='modal' id='modal1'>
+	    			    <div class='content'>
+	    			        <h1 class='title'>This is a modal</h1>
+	    			        <p>
+	    			                Here is some text and stuff. cool cool  
+	    			        </p>
+	    			        <a class='btn close-modal' data-modal="#modal1" href="#">K Bye</a>
+	    			    </div>  
+	    			</div>  
+	    		</div>    
+	    	</div>
+	    </div>  
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="js/slick.min.js"></script>
+	<script>    
+	    $('.slider').slick({
+	      dots: true,
+	      infinite: true,
+	      speed: 800,
+	      slidesToShow: 4,
+	      slidesToScroll: 4,
+	      responsive: [
+	        {
+	          breakpoint: 1024,
+	          settings: {
+	            slidesToShow: 3,
+	            slidesToScroll: 3,
+	            infinite: true,
+	            dots: true
+	          }
+	        }
+	      ]
+	    });
+	</script>
+	<script>
+		$(".modal").each( function(){
+		    $(this).wrap('<div class="overlay"></div>')
+		});
+
+		$(".open-modal").on('click', function(e){
+		    e.preventDefault();
+		    e.stopImmediatePropagation;
+		    
+		    var $this = $(this),
+		            modal = $($this).data("modal");
+		    
+		    $(modal).parents(".overlay").addClass("open");
+		    setTimeout( function(){
+		        $(modal).addClass("open");
+		    }, 350);
+		    
+		    $(document).on('click', function(e){
+		        var target = $(e.target);
+		        
+		        if ($(target).hasClass("overlay")){
+		            $(target).find(".modal").each( function(){
+		                $(this).removeClass("open");
+		            });
+		            setTimeout( function(){
+		                $(target).removeClass("open");
+		            }, 350);
+		        }
+		        
+		    });
+		    
+		});
+
+		$(".close-modal").on('click', function(e){
+		    e.preventDefault();
+		    e.stopImmediatePropagation;
+		    
+		    var $this = $(this),
+		            modal = $($this).data("modal");
+		    
+		    $(modal).removeClass("open");
+		    setTimeout( function(){ 
+		        $(modal).parents(".overlay").removeClass("open");
+		    }, 350);
+		    
+		}); 
+	</script>
+
+	<script src="js/script.js"></script>
+</body>
+</html>
