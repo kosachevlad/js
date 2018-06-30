@@ -9,4 +9,9 @@ window.addEventListener('DOMContentLoaded', () => {
 	close.addEventListener('click', function() {
 		popupEngineer.style.display = 'none';
 	});
+	popupEngineer.addEventListener('click', function(){
+		if(event.target == this) {
+			popupEngineer.style.display = 'none';
+		}
+	});
 });
