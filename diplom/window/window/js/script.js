@@ -1,20 +1,30 @@
 window.addEventListener('DOMContentLoaded', () => {
-	function modal(){
-		let headerBtn = document.getElementsByClassName('header_btn')[0],
-			popupEngineer = document.getElementsByClassName('popup_engineer')[0],
-			close = document.getElementsByClassName('popup_close')[1];
+	
+	let headerBtn = document.getElementsByClassName('header_btn'),
+		popupEngineer = document.querySelector('.popup_engineer'),
+		close = document.getElementsByClassName('popup_close'),
+		phoneLink = document.getElementsByClassName('phone_link'),
+		popup = document.querySelector('.popup');
 
-		headerBtn.addEventListener('click', () => {
-			popupEngineer.style.display = 'block';
-		});
-		close.addEventListener('click', () => {
-			popupEngineer.style.display = 'none';
-		});
-		popupEngineer.addEventListener('click', function(){
+	function modal(btn, elem){
+		for(i = 0; i < btn.length; i++) {
+			btn[i].addEventListener('click', (e) => {
+				e.preventDefault();
+				elem.style.display = 'block';
+			});
+		};
+		for(i = 0; i < close.length; i++) {
+			close[i].addEventListener('click', () => {
+				elem.style.display = 'none';
+			});
+		};
+		elem.addEventListener('click', function(){
 			if(event.target == this) {
-				popupEngineer.style.display = 'none';
+				elem.style.display = 'none';
 			}
 		});
 	};
-	modal();
+	modal(headerBtn, popupEngineer);
+	modal(phoneLink, popup);
+
 });
