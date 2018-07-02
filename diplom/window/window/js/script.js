@@ -36,8 +36,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	let formEn = popupEngineer.getElementsByClassName('form')[0],
 		form = popup.getElementsByClassName('form')[0],
-		inputEn = formEn.getElementsByTagName('input')
-		input = form.getElementsByTagName('input');
+		formMain = document.querySelectorAll('.main_form'),
+		inputEn = formEn.getElementsByTagName('input'),
+		input = form.getElementsByTagName('input'),
+		inputMain = formMain.getElementsByTagName('input');
 
 	function sendingDataModal(form, input){
 		
@@ -74,6 +76,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	};
 	sendingDataModal(form, input);
 	sendingDataModal(formEn, inputEn);
+
 	// Запрет на ввод любых символов кроме цифр в поле "Введите телефон"
 	let phoneInput = document.getElementsByName('user_phone'); 
 		for(i = 0; i < phoneInput.length; i++) {
