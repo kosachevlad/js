@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				elem.style.display = 'none';
 			});
 		};
-		elem.addEventListener('click', function(){
+		elem.addEventListener('click', function(event){
 			if(event.target == this) {
 				elem.style.display = 'none';
 			}
