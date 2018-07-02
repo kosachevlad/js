@@ -74,4 +74,16 @@ window.addEventListener('DOMContentLoaded', () => {
 	};
 	sendingDataModal(form, input);
 	sendingDataModal(formEn, inputEn);
+	// Запрет на ввод любых символов кроме цифр в поле "Введите телефон"
+	let phoneInput = document.getElementsByName('user_phone'); 
+		for(i = 0; i < phoneInput.length; i++) {
+		function check(elem) {
+			elem[i].addEventListener('keyup', function(){
+				this.value = this.value.replace(/[^\d]/, '');
+
+			});
+		};
+		check(phoneInput);
+	}
+
 });
