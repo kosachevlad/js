@@ -3,7 +3,7 @@ function sendForm() {
 	let message = new Object();
 	message.loading = "Загрузка...";
 	message.success = "Спасибо! Скоро мы свяжемся с Вами...";
-	message.failure = "Что-то пошло не так...";
+	message.failure = "Что-то пошло не так, попробуйте еще раз...";
 	let statusMessage = document.createElement('div');
 		statusMessage.classList.add('status');
 
