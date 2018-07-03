@@ -128,7 +128,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	};
 	// Табы
 
-	let tab = document.getElementsByClassName('glazing_block'),
+	let tab = document.getElementsByClassName('glazing_link'),
 		tabContent = document.getElementsByClassName('glazing_tab');
 
 	for (let i = 0; i < tab.length; i++) {
