@@ -7,13 +7,13 @@ window.addEventListener('DOMContentLoaded', () => {
 		popup = document.querySelector('.popup');
 
 	function modal(btn, elem){
-		for(i = 0; i < btn.length; i++) {
+		for(let i = 0; i < btn.length; i++) {
 			btn[i].addEventListener('click', (e) => {
 				e.preventDefault();
 				elem.style.display = 'block';
 			});
 		};
-		for(i = 0; i < close.length; i++) {
+		for(let i = 0; i < close.length; i++) {
 			close[i].addEventListener('click', () => {
 				elem.style.display = 'none';
 			});
@@ -30,8 +30,8 @@ window.addEventListener('DOMContentLoaded', () => {
 	let message = new Object();
 		message.loading = "Загрузка...";
 		message.success = "Спасибо! Скоро мы свяжемся с Вами...";
-		message.failure = "Что-то пошло не так, попробуйте еще раз...",
-		statusMessage = document.createElement('div');
+		message.failure = "Что-то пошло не так, попробуйте еще раз...";
+	let statusMessage = document.createElement('div');
 		statusMessage.classList.add('status');
 
 	let formEn = popupEngineer.getElementsByClassName('form')[0],
@@ -117,8 +117,8 @@ window.addEventListener('DOMContentLoaded', () => {
 	sendingDataMain();
 	// Запрет на ввод любых символов кроме цифр в поле "Введите телефон"
 	let phoneInput = document.getElementsByName('user_phone'); 
-		for(i = 0; i < phoneInput.length; i++) {
-		function check(elem) {
+		for(let i = 0; i < phoneInput.length; i++) {
+			function check(elem) {
 			elem[i].addEventListener('keyup', function(){
 				this.value = this.value.replace(/[^\d]/, '');
 
@@ -143,6 +143,83 @@ window.addEventListener('DOMContentLoaded', () => {
 				}
 			}
 		})
-	}
+	};
+
+	// модальное окно с классом popup_calc
+
+	let glazeBtn = document.getElementsByClassName('glazing_price_btn'),
+		popupCalc = document.getElementsByClassName('popup_calc')[0],
+		closeCalc = document.getElementsByClassName('popup_calc_close')[0],
+		balconIcons = document.getElementsByClassName('balcon_icons')[0],
+		imgIcons = balconIcons.getElementsByTagName('img'),
+		bigImgBlock = document.getElementsByClassName('big_img')[0],
+		bigImg = bigImgBlock.getElementsByTagName('img'),
+		inputPopup = popupCalc.getElementsByTagName('input'),
+		popupBtn = popupCalc.getElementsByClassName('popup_calc_button')[0],
+		popupCalcProfile = document.getElementsByClassName('popup_calc_profile')[0],
+		popupCalcProfileClose = document.getElementsByClassName('popup_calc_profile_close')[0],
+		popupProfileBtn = popupCalcProfile.getElementsByClassName('popup_calc_profile_button')[0],
+		popupCalcEnd = document.getElementsByClassName('popup_calc_end')[0],
+		popupCalcEndClose = document.getElementsByClassName('popup_calc_end_close')[0];
+
+
+		console.log(popupBtn);
+
+
+	for(let i = 0; i < glazeBtn.length; i ++) {
+		glazeBtn[i].addEventListener('click', function() {
+			popupCalc.style.display = 'block';
+		})
+	};
+	closeCalc.addEventListener('click', () => {
+		popupCalc.style.display = 'none';
+	});
+
+	for(let i = 0; i < imgIcons.length; i++) {
+		imgIcons[i].addEventListener('click', function(){
+			event.preventDefault();
+			for(let j = 0; j < imgIcons.length; j++) {
+				if (j == i) {
+					imgIcons[j].style.width = '120px';
+					bigImg[j].style.display = 'inline-block';
+				} else {
+					imgIcons[j].style.width = 'auto';
+					bigImg[j].style.display = 'none';
+				}
+			}			
+		})
+	};
+
+	for(let i = 0; i < inputPopup.length; i++) {
+		function check(elem) {
+			elem[i].addEventListener('keyup', function(){
+				this.value = this.value.replace(/[^\d]/, '');
+
+			});
+		};
+		check(inputPopup);
+	};
+
+	popupBtn.addEventListener('click', function() {
+		popupCalc.style.display = 'none';
+		popupCalcProfile.style.display = 'block';
+	});
+
+	popupProfileBtn.addEventListener('click', function() {
+		popupCalcProfile.style.display = 'none';
+		popupCalcEnd.style.display = 'block';
+	});
+	popupCalcProfileClose.addEventListener('click', function() {
+		popupCalcProfile.style.display = 'none';
+	})
+	popupCalcEndClose.addEventListener('click', function() {
+		popupCalcEnd.style.display = 'none';
+	})
+
+
+
+
+
+
 
 });
