@@ -125,6 +125,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			});
 		};
 		check(phoneInput);
+
 	};
 	// Табы
 
@@ -163,8 +164,9 @@ window.addEventListener('DOMContentLoaded', () => {
 		popupCalcEndClose = document.getElementsByClassName('popup_calc_end_close')[0];
 
 
-		console.log(popupBtn);
-
+	let data = {
+		type: '1-я форма балкона',
+	};
 
 	for(let i = 0; i < glazeBtn.length; i ++) {
 		glazeBtn[i].addEventListener('click', function() {
@@ -173,6 +175,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	};
 	closeCalc.addEventListener('click', () => {
 		popupCalc.style.display = 'none';
+		data = {};
 	});
 
 	for(let i = 0; i < imgIcons.length; i++) {
@@ -186,8 +189,9 @@ window.addEventListener('DOMContentLoaded', () => {
 					imgIcons[j].style.width = 'auto';
 					bigImg[j].style.display = 'none';
 				}
-			}			
-		})
+			}
+			data.type = i+1+'-я форма балкона';
+		});
 	};
 
 	for(let i = 0; i < inputPopup.length; i++) {
@@ -198,28 +202,98 @@ window.addEventListener('DOMContentLoaded', () => {
 			});
 		};
 		check(inputPopup);
+		inputPopup[0].addEventListener('change', function() {
+			data.width = inputPopup[0].value + ' мм';
+		});
+		inputPopup[1].addEventListener('change', function() {
+			data.height = inputPopup[1].value + ' мм';
+		});		
 	};
+
+	setInterval(() => {
+    	if (inputPopup[0].value == '' || inputPopup[1].value == '') {
+      		popupBtn.setAttribute('disabled', 'true');
+     	} else {
+      		popupBtn.removeAttribute('disabled', 'true');
+     	}
+ 	}, 0);
 
 	popupBtn.addEventListener('click', function() {
 		popupCalc.style.display = 'none';
 		popupCalcProfile.style.display = 'block';
 	});
+	let select = document.getElementById('view_type'),
+		checkbox = document.getElementsByClassName('checkbox'),
+		checkboxCustom = document.getElementsByClassName('checkbox-custom');
 
+	setInterval(() => {
+	     for (let i = 0; i < checkbox.length; i++) {
+	       if (checkbox[i].checked == false) {
+	         popupProfileBtn.setAttribute('disabled', 'true');
+	       };
+	     };
+	     if (checkbox[0].checked) {
+	       checkbox[1].checked = false;
+	       popupProfileBtn.removeAttribute('disabled', 'true');
+	       data.checkbox = 'Холодное';
+
+	     };
+	     if (checkbox[1].checked) {
+	       checkbox[0].checked = false;
+	       popupProfileBtn.removeAttribute('disabled', 'true');
+	       data.checkbox = 'Теплое';
+	     };
+	   }, 0);
+	
 	popupProfileBtn.addEventListener('click', function() {
+		data.category = select.options[select.selectedIndex].value;
 		popupCalcProfile.style.display = 'none';
 		popupCalcEnd.style.display = 'block';
 	});
 	popupCalcProfileClose.addEventListener('click', function() {
 		popupCalcProfile.style.display = 'none';
-	})
+		data = {};
+	});
 	popupCalcEndClose.addEventListener('click', function() {
 		popupCalcEnd.style.display = 'none';
-	})
+		data = {};
+	});
 
+	let popupEndForm = popupCalcEnd.getElementsByClassName('form')[0],
+		popupEndBtn = popupEndForm.getElementsByTagName('button')[0],
+		inputName = document.getElementsByName('end_user_name')[0],
+		inputPhone = document.getElementsByName('end_user_phone')[0];
 
+	inputPhone.addEventListener('keyup', function(){
+		this.value = this.value.replace(/[^\d]/, '');
+		});
 
+	popupEndBtn.addEventListener('click', function(e) {
+		e.preventDefault();
+		popupEndForm.appendChild(statusMessage);
+	    data.userName = inputName.value;
+	    data.userPhone = inputPhone.value;
+	    
+	    //ajax
+	    let request = new XMLHttpRequest();
+	    request.open('POST', 'server.php');
+	    request.setRequestHeader('Content-Type', 'aplication/x-www-form-urlencoded');
 
+	    let dataServer = JSON.stringify(data);
+	    request.send(dataServer);
 
-
-
+	    request.onreadystatechange = function () {
+	    	if (request.readyState < 4) {
+	    		statusMessage.innerHTML = message.loading;
+	    	} else if (request.readyState === 4) {
+	    		if (request.status == 200 && request.status < 300) {
+	    			statusMessage.innerHTML = message.success;
+	    		} else {
+	    			statusMessage.innerHTML = message.failure;
+	    		}
+	    	}
+	    };
+	    	inputName.value = '';
+	    	inputPhone.value = '';
+	  })
 });
