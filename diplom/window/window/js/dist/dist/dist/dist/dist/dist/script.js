@@ -313,7 +313,7 @@ window.addEventListener('DOMContentLoaded', function () {
 	});
 
 	// Табы
-	var tabSecond = document.getElementsByClassName('decoration_tab'),
+	var tabSecond = document.querySelector('div.decoration_item div'),
 	    contentSecond = document.getElementsByClassName('content_second');
 
 	console.log(tabSecond[0]);
