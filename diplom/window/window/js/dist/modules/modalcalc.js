@@ -38,8 +38,8 @@ function modalCalc() {
 	});
 
 	var _loop = function _loop(_i) {
-		imgIcons[_i].addEventListener('click', function () {
-			event.preventDefault();
+		imgIcons[_i].addEventListener('click', function (e) {
+			e.preventDefault();
 			for (var j = 0; j < imgIcons.length; j++) {
 				if (j == _i) {
 					imgIcons[j].style.width = '120px';
