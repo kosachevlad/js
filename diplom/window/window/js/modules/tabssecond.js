@@ -13,9 +13,8 @@ function tabsSecond() {
 					contentSecond[j].style.display = 'none';
 				}
 			}
-		})
-	};
-
+		});
+	}
 }
 
 module.exports = tabsSecond;

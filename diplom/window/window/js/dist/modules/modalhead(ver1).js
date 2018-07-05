@@ -13,22 +13,22 @@ function modalHead() {
 				e.preventDefault();
 				elem.style.display = 'block';
 			});
-		}
+		};
 		for (var _i = 0; _i < close.length; _i++) {
 			close[_i].addEventListener('click', function () {
 				elem.style.display = 'none';
 			});
-		}
+		};
 		elem.addEventListener('click', function (event) {
 			if (event.target == this) {
 				elem.style.display = 'none';
 			}
 		});
-	}
+	};
 	modal(headerBtn, popupEngineer);
 	modal(phoneLink, popup);
 
-	var message = {};
+	var message = new Object();
 	message.loading = "Загрузка...";
 	message.success = "Спасибо! Скоро мы свяжемся с Вами...";
 	message.failure = "Что-то пошло не так, попробуйте еще раз...";
@@ -69,9 +69,9 @@ function modalHead() {
 			};
 			for (var i = 0; i < input.length; i++) {
 				input[i].value = '';
-			}
+			};
 		});
-	}
+	};
 	sendingDataModal(form, input);
 	sendingDataModal(formEn, inputEn);
 }

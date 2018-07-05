@@ -1,3 +1,4 @@
+
 function modalCalc() {
 	let glazeBtn = document.getElementsByClassName('glazing_price_btn'),
 		popupCalc = document.getElementsByClassName('popup_calc')[0],
@@ -13,6 +14,13 @@ function modalCalc() {
 		popupProfileBtn = popupCalcProfile.getElementsByClassName('popup_calc_profile_button')[0],
 		popupCalcEnd = document.getElementsByClassName('popup_calc_end')[0],
 		popupCalcEndClose = document.getElementsByClassName('popup_calc_end_close')[0];
+  
+  let message = {};
+		message.loading = "Загрузка...";
+		message.success = "Спасибо! Скоро мы свяжемся с Вами...";
+		message.failure = "Что-то пошло не так, попробуйте еще раз...";
+	let statusMessage = document.createElement('div');
+		statusMessage.classList.add('status');
 
 
 	let data = {
@@ -22,8 +30,8 @@ function modalCalc() {
 	for(let i = 0; i < glazeBtn.length; i ++) {
 		glazeBtn[i].addEventListener('click', function() {
 			popupCalc.style.display = 'block';
-		})
-	};
+		});
+	}
 	closeCalc.addEventListener('click', () => {
 		popupCalc.style.display = 'none';
 		data = {};
@@ -43,10 +51,10 @@ function modalCalc() {
 			}
 			data.type = i+1+'-я форма балкона';
 		});
-	};
+	}
 
 	for(let i = 0; i < inputPopup.length; i++) {
-		function check(elem) {
+		let check = function(elem) {
 			elem[i].addEventListener('keyup', function(){
 				this.value = this.value.replace(/[^\d]/, '');
 
@@ -59,10 +67,10 @@ function modalCalc() {
 		inputPopup[1].addEventListener('change', function() {
 			data.height = inputPopup[1].value + ' мм';
 		});		
-	};
+	}
 
 	setInterval(() => {
-    	if (inputPopup[0].value == '' || inputPopup[1].value == '') {
+    	if (inputPopup[0].value === '' || inputPopup[1].value === '') {
       		popupBtn.setAttribute('disabled', 'true');
      	} else {
       		popupBtn.removeAttribute('disabled', 'true');
@@ -74,26 +82,25 @@ function modalCalc() {
 		popupCalcProfile.style.display = 'block';
 	});
 	let select = document.getElementById('view_type'),
-		checkbox = document.getElementsByClassName('checkbox'),
-		checkboxCustom = document.getElementsByClassName('checkbox-custom');
+		checkbox = document.getElementsByClassName('checkbox');
 
 	setInterval(() => {
 	     for (let i = 0; i < checkbox.length; i++) {
-	       if (checkbox[i].checked == false) {
+	       if (checkbox[i].checked === false) {
 	         popupProfileBtn.setAttribute('disabled', 'true');
-	       };
-	     };
+	       }
+	     }
 	     if (checkbox[0].checked) {
 	       checkbox[1].checked = false;
 	       popupProfileBtn.removeAttribute('disabled', 'true');
 	       data.checkbox = 'Холодное';
 
-	     };
+	     }
 	     if (checkbox[1].checked) {
 	       checkbox[0].checked = false;
 	       popupProfileBtn.removeAttribute('disabled', 'true');
 	       data.checkbox = 'Теплое';
-	     };
+	     }
 	   }, 0);
 	
 	popupProfileBtn.addEventListener('click', function() {
@@ -147,6 +154,7 @@ function modalCalc() {
 	    	inputName.value = '';
 	    	inputPhone.value = '';
 	  });
-};
+}
 
 module.exports = modalCalc;
+  

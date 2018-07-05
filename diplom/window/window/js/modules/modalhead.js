@@ -11,22 +11,22 @@ function modalHead() {
 				e.preventDefault();
 				elem.style.display = 'block';
 			});
-		};
+		}
 		for(let i = 0; i < close.length; i++) {
 			close[i].addEventListener('click', () => {
 				elem.style.display = 'none';
 			});
-		};
+		}
 		elem.addEventListener('click', function(event){
 			if(event.target == this) {
 				elem.style.display = 'none';
 			}
 		});
-	};
+	}
 	modal(headerBtn, popupEngineer);
 	modal(phoneLink, popup);
 
-	let message = new Object();
+        let message = {};
 		message.loading = "Загрузка...";
 		message.success = "Спасибо! Скоро мы свяжемся с Вами...";
 		message.failure = "Что-то пошло не так, попробуйте еще раз...";
@@ -46,7 +46,7 @@ function modalHead() {
 
 			// AJAX
 			let request = new XMLHttpRequest();
-			request.open("POST", 'server.php')
+			request.open("POST", 'server.php');
 
 			request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
@@ -65,12 +65,12 @@ function modalHead() {
 						statusMessage.innerHTML = message.failure;
 					}
 				}
-			}
+			};
 			for (let i = 0; i < input.length; i++) {
 				input[i].value = '';
-			};
+			}
 		});
-	};
+	}
 	sendingDataModal(form, input);
 	sendingDataModal(formEn, inputEn);
 }

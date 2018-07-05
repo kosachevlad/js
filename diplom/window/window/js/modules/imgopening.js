@@ -1,4 +1,4 @@
-function imgOpening() {
+  function imgOpening() {
 	let linkImg = document.querySelectorAll('div.modal_img>a'),
 		modalImgOpen = document.createElement('div'),
 		openImg = document.createElement('img'),
@@ -16,12 +16,12 @@ function imgOpening() {
 			openImg.setAttribute('src', linkHref);
 			openImg.classList.add('open_img');
 		});
-	};
+	}
 	modalImgOpen.addEventListener('click', function(e) {
 		let target = e.target;
 		if (target == this) {
 			modalImgOpen.style.display = 'none';
-		};
+		}
 	});
 }
 

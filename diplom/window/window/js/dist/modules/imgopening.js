@@ -23,12 +23,12 @@ function imgOpening() {
 
 	for (var i = 0; i < linkImg.length; i++) {
 		_loop(i);
-	};
+	}
 	modalImgOpen.addEventListener('click', function (e) {
 		var target = e.target;
 		if (target == this) {
 			modalImgOpen.style.display = 'none';
-		};
+		}
 	});
 }
 

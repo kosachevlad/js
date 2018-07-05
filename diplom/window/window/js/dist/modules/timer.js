@@ -18,10 +18,10 @@ function timer() {
 			'minutes': minutes,
 			'seconds': seconds
 		};
-	};
+	}
 	function setClock(id, endtime) {
-		var timer = document.getElementById(id),
-		    days = document.querySelector('#days'),
+		var // timer = document.getElementById(id),
+		days = document.querySelector('#days'),
 		    hours = document.querySelector('#hours'),
 		    minutes = document.querySelector('#minutes'),
 		    seconds = document.querySelector('#seconds');
@@ -32,8 +32,8 @@ function timer() {
 			for (var i = 0; i < arrTime.length; i++) {
 				if (arrTime[i] < 10) {
 					arrTime[i] = '0' + arrTime[i];
-				};
-			};
+				}
+			}
 			days.innerHTML = arrTime[0];
 			hours.innerHTML = arrTime[1];
 			minutes.innerHTML = arrTime[2];
@@ -44,10 +44,10 @@ function timer() {
 				hours.innerHTML = '00';
 				minutes.innerHTML = '00';
 				seconds.innerHTML = '00';
-			};
-		};
+			}
+		}
 		var timeInterval = setInterval(updateClock, 1000);
-	};
+	}
 	setClock(eTimer, deadLine);
 }
 

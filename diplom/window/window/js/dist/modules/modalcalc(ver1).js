@@ -16,13 +16,6 @@ function modalCalc() {
 	    popupCalcEnd = document.getElementsByClassName('popup_calc_end')[0],
 	    popupCalcEndClose = document.getElementsByClassName('popup_calc_end_close')[0];
 
-	var message = {};
-	message.loading = "Загрузка...";
-	message.success = "Спасибо! Скоро мы свяжемся с Вами...";
-	message.failure = "Что-то пошло не так, попробуйте еще раз...";
-	var statusMessage = document.createElement('div');
-	statusMessage.classList.add('status');
-
 	var data = {
 		type: '1-я форма балкона'
 	};
@@ -31,7 +24,7 @@ function modalCalc() {
 		glazeBtn[i].addEventListener('click', function () {
 			popupCalc.style.display = 'block';
 		});
-	}
+	};
 	closeCalc.addEventListener('click', function () {
 		popupCalc.style.display = 'none';
 		data = {};
@@ -55,10 +48,10 @@ function modalCalc() {
 
 	for (var _i = 0; _i < imgIcons.length; _i++) {
 		_loop(_i);
-	}
+	};
 
 	var _loop2 = function _loop2(_i2) {
-		var check = function check(elem) {
+		function check(elem) {
 			elem[_i2].addEventListener('keyup', function () {
 				this.value = this.value.replace(/[^\d]/, '');
 			});
@@ -74,10 +67,10 @@ function modalCalc() {
 
 	for (var _i2 = 0; _i2 < inputPopup.length; _i2++) {
 		_loop2(_i2);
-	}
+	};
 
 	setInterval(function () {
-		if (inputPopup[0].value === '' || inputPopup[1].value === '') {
+		if (inputPopup[0].value == '' || inputPopup[1].value == '') {
 			popupBtn.setAttribute('disabled', 'true');
 		} else {
 			popupBtn.removeAttribute('disabled', 'true');
@@ -89,24 +82,25 @@ function modalCalc() {
 		popupCalcProfile.style.display = 'block';
 	});
 	var select = document.getElementById('view_type'),
-	    checkbox = document.getElementsByClassName('checkbox');
+	    checkbox = document.getElementsByClassName('checkbox'),
+	    checkboxCustom = document.getElementsByClassName('checkbox-custom');
 
 	setInterval(function () {
 		for (var _i3 = 0; _i3 < checkbox.length; _i3++) {
-			if (checkbox[_i3].checked === false) {
+			if (checkbox[_i3].checked == false) {
 				popupProfileBtn.setAttribute('disabled', 'true');
-			}
-		}
+			};
+		};
 		if (checkbox[0].checked) {
 			checkbox[1].checked = false;
 			popupProfileBtn.removeAttribute('disabled', 'true');
 			data.checkbox = 'Холодное';
-		}
+		};
 		if (checkbox[1].checked) {
 			checkbox[0].checked = false;
 			popupProfileBtn.removeAttribute('disabled', 'true');
 			data.checkbox = 'Теплое';
-		}
+		};
 	}, 0);
 
 	popupProfileBtn.addEventListener('click', function () {
@@ -160,6 +154,6 @@ function modalCalc() {
 		inputName.value = '';
 		inputPhone.value = '';
 	});
-}
+};
 
 module.exports = modalCalc;

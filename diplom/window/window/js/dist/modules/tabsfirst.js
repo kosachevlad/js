@@ -20,7 +20,7 @@ function tabsFirst() {
 
 	for (var i = 0; i < tab.length; i++) {
 		_loop(i);
-	};
+	}
 }
 
 module.exports = tabsFirst;

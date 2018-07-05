@@ -38,18 +38,21 @@
 
 			for (var i = 0; i < linkImg.length; i++) {
 				_loop(i);
-			};
+			}
 			modalImgOpen.addEventListener('click', function (e) {
 				var target = e.target;
 				if (target == this) {
 					modalImgOpen.style.display = 'none';
-				};
+				}
 			});
 		}
 
 		module.exports = imgOpening;
 	}, {}], 2: [function (require, module, exports) {
 		function minutePopup() {
+
+			var popup = document.querySelector('.popup');
+
 			setTimeout(function () {
 				popup.style.display = 'block';
 			}, 60000);
@@ -57,6 +60,7 @@
 
 		module.exports = minutePopup;
 	}, {}], 3: [function (require, module, exports) {
+
 		function modalCalc() {
 			var glazeBtn = document.getElementsByClassName('glazing_price_btn'),
 			    popupCalc = document.getElementsByClassName('popup_calc')[0],
@@ -73,6 +77,13 @@
 			    popupCalcEnd = document.getElementsByClassName('popup_calc_end')[0],
 			    popupCalcEndClose = document.getElementsByClassName('popup_calc_end_close')[0];
 
+			var message = {};
+			message.loading = "Загрузка...";
+			message.success = "Спасибо! Скоро мы свяжемся с Вами...";
+			message.failure = "Что-то пошло не так, попробуйте еще раз...";
+			var statusMessage = document.createElement('div');
+			statusMessage.classList.add('status');
+
 			var data = {
 				type: '1-я форма балкона'
 			};
@@ -81,7 +92,7 @@
 				glazeBtn[i].addEventListener('click', function () {
 					popupCalc.style.display = 'block';
 				});
-			};
+			}
 			closeCalc.addEventListener('click', function () {
 				popupCalc.style.display = 'none';
 				data = {};
@@ -105,10 +116,10 @@
 
 			for (var _i = 0; _i < imgIcons.length; _i++) {
 				_loop2(_i);
-			};
+			}
 
 			var _loop3 = function _loop3(_i2) {
-				function check(elem) {
+				var check = function check(elem) {
 					elem[_i2].addEventListener('keyup', function () {
 						this.value = this.value.replace(/[^\d]/, '');
 					});
@@ -124,10 +135,10 @@
 
 			for (var _i2 = 0; _i2 < inputPopup.length; _i2++) {
 				_loop3(_i2);
-			};
+			}
 
 			setInterval(function () {
-				if (inputPopup[0].value == '' || inputPopup[1].value == '') {
+				if (inputPopup[0].value === '' || inputPopup[1].value === '') {
 					popupBtn.setAttribute('disabled', 'true');
 				} else {
 					popupBtn.removeAttribute('disabled', 'true');
@@ -139,25 +150,24 @@
 				popupCalcProfile.style.display = 'block';
 			});
 			var select = document.getElementById('view_type'),
-			    checkbox = document.getElementsByClassName('checkbox'),
-			    checkboxCustom = document.getElementsByClassName('checkbox-custom');
+			    checkbox = document.getElementsByClassName('checkbox');
 
 			setInterval(function () {
 				for (var _i3 = 0; _i3 < checkbox.length; _i3++) {
-					if (checkbox[_i3].checked == false) {
+					if (checkbox[_i3].checked === false) {
 						popupProfileBtn.setAttribute('disabled', 'true');
-					};
-				};
+					}
+				}
 				if (checkbox[0].checked) {
 					checkbox[1].checked = false;
 					popupProfileBtn.removeAttribute('disabled', 'true');
 					data.checkbox = 'Холодное';
-				};
+				}
 				if (checkbox[1].checked) {
 					checkbox[0].checked = false;
 					popupProfileBtn.removeAttribute('disabled', 'true');
 					data.checkbox = 'Теплое';
-				};
+				}
 			}, 0);
 
 			popupProfileBtn.addEventListener('click', function () {
@@ -211,7 +221,7 @@
 				inputName.value = '';
 				inputPhone.value = '';
 			});
-		};
+		}
 
 		module.exports = modalCalc;
 	}, {}], 4: [function (require, module, exports) {
@@ -228,22 +238,22 @@
 						e.preventDefault();
 						elem.style.display = 'block';
 					});
-				};
+				}
 				for (var _i4 = 0; _i4 < close.length; _i4++) {
 					close[_i4].addEventListener('click', function () {
 						elem.style.display = 'none';
 					});
-				};
+				}
 				elem.addEventListener('click', function (event) {
 					if (event.target == this) {
 						elem.style.display = 'none';
 					}
 				});
-			};
+			}
 			modal(headerBtn, popupEngineer);
 			modal(phoneLink, popup);
 
-			var message = new Object();
+			var message = {};
 			message.loading = "Загрузка...";
 			message.success = "Спасибо! Скоро мы свяжемся с Вами...";
 			message.failure = "Что-то пошло не так, попробуйте еще раз...";
@@ -284,9 +294,9 @@
 					};
 					for (var i = 0; i < input.length; i++) {
 						input[i].value = '';
-					};
+					}
 				});
-			};
+			}
 			sendingDataModal(form, input);
 			sendingDataModal(formEn, inputEn);
 		}
@@ -295,6 +305,13 @@
 	}, {}], 5: [function (require, module, exports) {
 		function modalSix() {
 			var formMain = document.querySelectorAll('.main_form');
+			var message = new Object();
+			message.loading = "Загрузка...";
+			message.success = "Спасибо! Скоро мы свяжемся с Вами...";
+			message.failure = "Что-то пошло не так, попробуйте еще раз...";
+			var statusMessage = document.createElement('div');
+			statusMessage.classList.add('status');
+
 			function sendingDataMain() {
 				var _loop4 = function _loop4(i) {
 					formMain[i].addEventListener('submit', function (event) {
@@ -323,7 +340,7 @@
 							}
 						};
 
-						inputMain = formMain[i].getElementsByTagName('input');
+						var inputMain = formMain[i].getElementsByTagName('input');
 						for (var j = 0; j < inputMain.length; j++) {
 							inputMain[j].value = '';
 						}
@@ -332,14 +349,14 @@
 
 				for (var i = 0; i < formMain.length; i++) {
 					_loop4(i);
-				};
-			};
+				}
+			}
 			sendingDataMain();
 			// Запрет на ввод любых символов кроме цифр в поле "Введите телефон"
 			var phoneInput = document.getElementsByName('user_phone');
 
 			var _loop5 = function _loop5(i) {
-				function check(elem) {
+				var check = function check(elem) {
 					elem[i].addEventListener('keyup', function () {
 						this.value = this.value.replace(/[^\d]/, '');
 					});
@@ -349,7 +366,7 @@
 
 			for (var i = 0; i < phoneInput.length; i++) {
 				_loop5(i);
-			};
+			}
 		}
 
 		module.exports = modalSix;
@@ -374,7 +391,7 @@
 
 			for (var i = 0; i < tab.length; i++) {
 				_loop6(i);
-			};
+			}
 		}
 
 		module.exports = tabsFirst;
@@ -399,7 +416,7 @@
 
 			for (var i = 0; i < tabSecond.length; i++) {
 				_loop7(i);
-			};
+			}
 		}
 
 		module.exports = tabsSecond;
@@ -422,10 +439,10 @@
 					'minutes': minutes,
 					'seconds': seconds
 				};
-			};
+			}
 			function setClock(id, endtime) {
-				var timer = document.getElementById(id),
-				    days = document.querySelector('#days'),
+				var // timer = document.getElementById(id),
+				days = document.querySelector('#days'),
 				    hours = document.querySelector('#hours'),
 				    minutes = document.querySelector('#minutes'),
 				    seconds = document.querySelector('#seconds');
@@ -436,8 +453,8 @@
 					for (var i = 0; i < arrTime.length; i++) {
 						if (arrTime[i] < 10) {
 							arrTime[i] = '0' + arrTime[i];
-						};
-					};
+						}
+					}
 					days.innerHTML = arrTime[0];
 					hours.innerHTML = arrTime[1];
 					minutes.innerHTML = arrTime[2];
@@ -448,10 +465,10 @@
 						hours.innerHTML = '00';
 						minutes.innerHTML = '00';
 						seconds.innerHTML = '00';
-					};
-				};
+					}
+				}
 				var timeInterval = setInterval(updateClock, 1000);
-			};
+			}
 			setClock(eTimer, deadLine);
 		}
 
