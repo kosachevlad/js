@@ -1,154 +1,42 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-window.addEventListener('DOMContentLoaded', () => {
+function imgOpening() {
+	let linkImg = document.querySelectorAll('div.modal_img>a'),
+		modalImgOpen = document.createElement('div'),
+		openImg = document.createElement('img'),
+		sectionWorks = document.getElementsByClassName('works')[0];
 
-	let headerBtn = document.getElementsByClassName('header_btn'),
-		popupEngineer = document.querySelector('.popup_engineer'),
-		close = document.getElementsByClassName('popup_close'),
-		phoneLink = document.getElementsByClassName('phone_link'),
-		popup = document.querySelector('.popup');
-
-	function modal(btn, elem){
-		for(let i = 0; i < btn.length; i++) {
-			btn[i].addEventListener('click', (e) => {
-				e.preventDefault();
-				elem.style.display = 'block';
-			});
-		};
-		for(let i = 0; i < close.length; i++) {
-			close[i].addEventListener('click', () => {
-				elem.style.display = 'none';
-			});
-		};
-		elem.addEventListener('click', function(event){
-			if(event.target == this) {
-				elem.style.display = 'none';
-			}
+		sectionWorks.appendChild(modalImgOpen);
+	for(let i = 0; i < linkImg.length; i++) {
+		linkImg[i].addEventListener('click', function(e) {
+			e.preventDefault();
+			modalImgOpen.style.display = 'block';
+			modalImgOpen.appendChild(openImg);
+			modalImgOpen.classList.add('modal_open');
+			modalImgOpen.classList.add('fade');
+			let linkHref = linkImg[i].getAttribute('href');
+			openImg.setAttribute('src', linkHref);
+			openImg.classList.add('open_img');
 		});
 	};
-	modal(headerBtn, popupEngineer);
-	modal(phoneLink, popup);
-
-	let message = new Object();
-		message.loading = "Загрузка...";
-		message.success = "Спасибо! Скоро мы свяжемся с Вами...";
-		message.failure = "Что-то пошло не так, попробуйте еще раз...";
-	let statusMessage = document.createElement('div');
-		statusMessage.classList.add('status');
-
-	let formEn = popupEngineer.getElementsByClassName('form')[0],
-		form = popup.getElementsByClassName('form')[0],
-		inputEn = formEn.getElementsByTagName('input'),
-		input = form.getElementsByTagName('input');
-		
-	function sendingDataModal(form, input){
-		
-		form.addEventListener('submit', function(event) {
-			event.preventDefault();
-			form.appendChild(statusMessage);
-
-			// AJAX
-			let request = new XMLHttpRequest();
-			request.open("POST", 'server.php')
-
-			request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-			let formData = new FormData(form);
-
-			request.send(formData);
-
-			request.onreadystatechange = function() {
-				if (request.readyState < 4) {
-					statusMessage.innerHTML = message.loading;
-				} else if (request.readyState === 4) {
-					if (request.status == 200 && request.status < 300) {
-						statusMessage.innerHTML = message.success;
-					}
-					else {
-						statusMessage.innerHTML = message.failure;
-					}
-				}
-			}
-			for (let i = 0; i < input.length; i++) {
-				input[i].value = '';
-			};
-		});
-	};
-	sendingDataModal(form, input);
-	sendingDataModal(formEn, inputEn);
-
-
-	// Модалка по 6 блокам на странице
-	let formMain = document.querySelectorAll('.main_form');
-	function sendingDataMain() {
-		for(let i = 0; i < formMain.length; i ++){
-			formMain[i].addEventListener('submit', function(event) {
-				event.preventDefault();
-				formMain[i].appendChild(statusMessage);
-
-				// AJAX
-				let request = new XMLHttpRequest();
-				request.open("POST", 'server.php')
-
-				request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-				let formData = new FormData(formMain[i]);
-
-				request.send(formData);
-
-				request.onreadystatechange = function() {
-					if (request.readyState < 4) {
-						statusMessage.innerHTML = message.loading;
-					} else if (request.readyState === 4) {
-						if (request.status == 200 && request.status < 300) {
-							statusMessage.innerHTML = message.success;
-						}
-						else {
-							statusMessage.innerHTML = message.failure;
-						}
-					}
-				}
-
-				inputMain = formMain[i].getElementsByTagName('input');
-				for (let j = 0; j < inputMain.length; j++) {
-					inputMain[j].value = '';
-				}
-			});
-		};	
-	};
-	sendingDataMain();
-	// Запрет на ввод любых символов кроме цифр в поле "Введите телефон"
-	let phoneInput = document.getElementsByName('user_phone'); 
-		for(let i = 0; i < phoneInput.length; i++) {
-			function check(elem) {
-			elem[i].addEventListener('keyup', function(){
-				this.value = this.value.replace(/[^\d]/, '');
-
-			});
+	modalImgOpen.addEventListener('click', function(e) {
+		let target = e.target;
+		if (target == this) {
+			modalImgOpen.style.display = 'none';
 		};
-		check(phoneInput);
+	});
+}
 
-	};
-	// Табы
+module.exports = imgOpening;
+},{}],2:[function(require,module,exports){
+function minutePopup() {
+	setTimeout(() => {
+	    popup.style.display = 'block';
+	  }, 60000);
+}
 
-	let tab = document.getElementsByClassName('glazing_link'),
-		tabContent = document.getElementsByClassName('glazing_tab');
-
-	for (let i = 0; i < tab.length; i++) {
-		tab[i].addEventListener('click', function(){
-			for(let j = 0; j < tab.length; j++) {
-				if (j == i) {
-					tab[j].classList.add('active');
-					tabContent[j].style.display = 'block';
-				} else {
-					tab[j].classList.remove('active');
-					tabContent[j].style.display = 'none';
-				}
-			}
-		})
-	};
-
-	// модальное окно с классом popup_calc
-
+module.exports = minutePopup;
+},{}],3:[function(require,module,exports){
+function modalCalc() {
 	let glazeBtn = document.getElementsByClassName('glazing_price_btn'),
 		popupCalc = document.getElementsByClassName('popup_calc')[0],
 		closeCalc = document.getElementsByClassName('popup_calc_close')[0],
@@ -297,9 +185,166 @@ window.addEventListener('DOMContentLoaded', () => {
 	    	inputName.value = '';
 	    	inputPhone.value = '';
 	  });
-	
+};
 
-	// Табы
+module.exports = modalCalc;
+},{}],4:[function(require,module,exports){
+function modalHead() {
+	let headerBtn = document.getElementsByClassName('header_btn'),
+		popupEngineer = document.querySelector('.popup_engineer'),
+		close = document.getElementsByClassName('popup_close'),
+		phoneLink = document.getElementsByClassName('phone_link'),
+		popup = document.querySelector('.popup');
+
+	function modal(btn, elem){
+		for(let i = 0; i < btn.length; i++) {
+			btn[i].addEventListener('click', (e) => {
+				e.preventDefault();
+				elem.style.display = 'block';
+			});
+		};
+		for(let i = 0; i < close.length; i++) {
+			close[i].addEventListener('click', () => {
+				elem.style.display = 'none';
+			});
+		};
+		elem.addEventListener('click', function(event){
+			if(event.target == this) {
+				elem.style.display = 'none';
+			}
+		});
+	};
+	modal(headerBtn, popupEngineer);
+	modal(phoneLink, popup);
+
+	let message = new Object();
+		message.loading = "Загрузка...";
+		message.success = "Спасибо! Скоро мы свяжемся с Вами...";
+		message.failure = "Что-то пошло не так, попробуйте еще раз...";
+	let statusMessage = document.createElement('div');
+		statusMessage.classList.add('status');
+
+	let formEn = popupEngineer.getElementsByClassName('form')[0],
+		form = popup.getElementsByClassName('form')[0],
+		inputEn = formEn.getElementsByTagName('input'),
+		input = form.getElementsByTagName('input');
+		
+	function sendingDataModal(form, input){
+		
+		form.addEventListener('submit', function(event) {
+			event.preventDefault();
+			form.appendChild(statusMessage);
+
+			// AJAX
+			let request = new XMLHttpRequest();
+			request.open("POST", 'server.php')
+
+			request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+			let formData = new FormData(form);
+
+			request.send(formData);
+
+			request.onreadystatechange = function() {
+				if (request.readyState < 4) {
+					statusMessage.innerHTML = message.loading;
+				} else if (request.readyState === 4) {
+					if (request.status == 200 && request.status < 300) {
+						statusMessage.innerHTML = message.success;
+					}
+					else {
+						statusMessage.innerHTML = message.failure;
+					}
+				}
+			}
+			for (let i = 0; i < input.length; i++) {
+				input[i].value = '';
+			};
+		});
+	};
+	sendingDataModal(form, input);
+	sendingDataModal(formEn, inputEn);
+}
+
+module.exports = modalHead;
+},{}],5:[function(require,module,exports){
+function modalSix() {
+	let formMain = document.querySelectorAll('.main_form');
+	function sendingDataMain() {
+		for(let i = 0; i < formMain.length; i ++){
+			formMain[i].addEventListener('submit', function(event) {
+				event.preventDefault();
+				formMain[i].appendChild(statusMessage);
+
+				// AJAX
+				let request = new XMLHttpRequest();
+				request.open("POST", 'server.php')
+
+				request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+				let formData = new FormData(formMain[i]);
+
+				request.send(formData);
+
+				request.onreadystatechange = function() {
+					if (request.readyState < 4) {
+						statusMessage.innerHTML = message.loading;
+					} else if (request.readyState === 4) {
+						if (request.status == 200 && request.status < 300) {
+							statusMessage.innerHTML = message.success;
+						}
+						else {
+							statusMessage.innerHTML = message.failure;
+						}
+					}
+				}
+
+				inputMain = formMain[i].getElementsByTagName('input');
+				for (let j = 0; j < inputMain.length; j++) {
+					inputMain[j].value = '';
+				}
+			});
+		};	
+	};
+	sendingDataMain();
+	// Запрет на ввод любых символов кроме цифр в поле "Введите телефон"
+	let phoneInput = document.getElementsByName('user_phone'); 
+		for(let i = 0; i < phoneInput.length; i++) {
+			function check(elem) {
+			elem[i].addEventListener('keyup', function(){
+				this.value = this.value.replace(/[^\d]/, '');
+
+			});
+		};
+		check(phoneInput);
+
+	};
+}
+
+module.exports = modalSix;
+},{}],6:[function(require,module,exports){
+function tabsFirst() {
+	let tab = document.getElementsByClassName('glazing_link'),
+		tabContent = document.getElementsByClassName('glazing_tab');
+
+	for (let i = 0; i < tab.length; i++) {
+		tab[i].addEventListener('click', function(){
+			for(let j = 0; j < tab.length; j++) {
+				if (j == i) {
+					tab[j].classList.add('active');
+					tabContent[j].style.display = 'block';
+				} else {
+					tab[j].classList.remove('active');
+					tabContent[j].style.display = 'none';
+				}
+			}
+		})
+	};
+}
+
+module.exports = tabsFirst;
+},{}],7:[function(require,module,exports){
+function tabsSecond() {
 	let tabSecond = document.getElementsByClassName('decoration_tab'),
 		contentSecond = document.getElementsByClassName('content_second');
 
@@ -317,8 +362,11 @@ window.addEventListener('DOMContentLoaded', () => {
 		})
 	};
 
-	// Таймер
+}
 
+module.exports = tabsSecond;
+},{}],8:[function(require,module,exports){
+function timer() {
 	let eTimer = document.getElementsByClassName('eTimer')[0],
 		deadLine = '2018-07-04';
 
@@ -367,43 +415,29 @@ window.addEventListener('DOMContentLoaded', () => {
 			let timeInterval = setInterval(updateClock, 1000);
 		};
 	setClock(eTimer, deadLine);
+}
 
-	// Открытие картинок по клику
+module.exports = timer;
+},{}],9:[function(require,module,exports){
+window.addEventListener('DOMContentLoaded', () => {
 
-	let linkImg = document.querySelectorAll('div.modal_img>a'),
-		modalImgOpen = document.createElement('div'),
-		openImg = document.createElement('img'),
-		sectionWorks = document.getElementsByClassName('works')[0];
+	let timer = require('./modules/timer.js');
+	let imgOpening = require('./modules/imgopening.js');
+	let minutePopup = require('./modules/minutepopup.js');
+	let modalCalc = require('./modules/modalcalc.js');
+	let modalHead = require('./modules/modalhead.js');
+	let modalSix = require('./modules/modalsix.js');
+	let tabsFirst = require('./modules/tabsfirst.js');
+	let tabsSecond = require('./modules/tabssecond.js');
 
-		sectionWorks.appendChild(modalImgOpen);
-	for(let i = 0; i < linkImg.length; i++) {
-		linkImg[i].addEventListener('click', function(e) {
-			e.preventDefault();
-			modalImgOpen.style.display = 'block';
-			modalImgOpen.appendChild(openImg);
-			modalImgOpen.classList.add('modal_open');
-			modalImgOpen.classList.add('fade');
-			let linkHref = linkImg[i].getAttribute('href');
-			openImg.setAttribute('src', linkHref);
-			openImg.classList.add('open_img');
-		});
-	};
-	modalImgOpen.addEventListener('click', function(e) {
-		let target = e.target;
-		if (target == this) {
-			modalImgOpen.style.display = 'none';
-		};
-	});
-
-	// Popup после 60 сек
-
-	setTimeout(() => {
-	    popup.style.display = 'block';
-	  }, 60000);
-
-
-
-
-
+	timer();
+	imgOpening();
+	minutePopup();
+	modalCalc();
+	modalHead();
+	modalSix();
+	tabsFirst();
+	tabsSecond();
+	
 });
-},{}]},{},[1]);
+},{"./modules/imgopening.js":1,"./modules/minutepopup.js":2,"./modules/modalcalc.js":3,"./modules/modalhead.js":4,"./modules/modalsix.js":5,"./modules/tabsfirst.js":6,"./modules/tabssecond.js":7,"./modules/timer.js":8}]},{},[9]);
