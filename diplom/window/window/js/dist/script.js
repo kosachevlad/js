@@ -316,8 +316,6 @@ window.addEventListener('DOMContentLoaded', function () {
 	var tabSecond = document.getElementsByClassName('decoration_tab'),
 	    contentSecond = document.getElementsByClassName('content_second');
 
-	console.log(tabSecond[0]);
-
 	var _loop6 = function _loop6(_i5) {
 		tabSecond[_i5].addEventListener('click', function () {
 			for (var j = 0; j < tabSecond.length; j++) {
@@ -335,4 +333,93 @@ window.addEventListener('DOMContentLoaded', function () {
 	for (var _i5 = 0; _i5 < tabSecond.length; _i5++) {
 		_loop6(_i5);
 	};
+
+	// Таймер
+
+	var eTimer = document.getElementsByClassName('eTimer')[0],
+	    deadLine = '2018-07-04';
+
+	function getTime(deadend) {
+		var t = Date.parse(deadend) - Date.parse(new Date()),
+		    seconds = Math.floor(t / 1000 % 60),
+		    minutes = Math.floor(t / (1000 * 60) % 60),
+		    hours = Math.floor(t / (1000 * 60 * 60) % 24),
+		    days = Math.floor(t / (1000 * 60 * 60 * 24));
+
+		return {
+			'total': t,
+			'days': days,
+			'hours': hours,
+			'minutes': minutes,
+			'seconds': seconds
+		};
+	};
+	function setClock(id, endtime) {
+		var timer = document.getElementById(id),
+		    days = document.querySelector('#days'),
+		    hours = document.querySelector('#hours'),
+		    minutes = document.querySelector('#minutes'),
+		    seconds = document.querySelector('#seconds');
+
+		function updateClock() {
+			var t = getTime(endtime);
+			var arrTime = [t.days, t.hours, t.minutes, t.seconds];
+			for (var _i6 = 0; _i6 < arrTime.length; _i6++) {
+				if (arrTime[_i6] < 10) {
+					arrTime[_i6] = '0' + arrTime[_i6];
+				};
+			};
+			days.innerHTML = arrTime[0];
+			hours.innerHTML = arrTime[1];
+			minutes.innerHTML = arrTime[2];
+			seconds.innerHTML = arrTime[3];
+			if (t.total <= 0) {
+				clearInterval(timeInterval);
+				days.innerHTML = '00';
+				hours.innerHTML = '00';
+				minutes.innerHTML = '00';
+				seconds.innerHTML = '00';
+			};
+		};
+		var timeInterval = setInterval(updateClock, 1000);
+	};
+	setClock(eTimer, deadLine);
+
+	// Открытие картинок по клику
+
+	var linkImg = document.querySelectorAll('div.modal_img>a'),
+	    modalImgOpen = document.createElement('div'),
+	    openImg = document.createElement('img'),
+	    sectionWorks = document.getElementsByClassName('works')[0];
+
+	sectionWorks.appendChild(modalImgOpen);
+
+	var _loop7 = function _loop7(_i7) {
+		linkImg[_i7].addEventListener('click', function (e) {
+			e.preventDefault();
+			modalImgOpen.style.display = 'block';
+			modalImgOpen.appendChild(openImg);
+			modalImgOpen.classList.add('modal_open');
+			modalImgOpen.classList.add('fade');
+			var linkHref = linkImg[_i7].getAttribute('href');
+			openImg.setAttribute('src', linkHref);
+			openImg.classList.add('open_img');
+		});
+	};
+
+	for (var _i7 = 0; _i7 < linkImg.length; _i7++) {
+		_loop7(_i7);
+	};
+	modalImgOpen.addEventListener('click', function (e) {
+		var target = e.target;
+		if (target == this) {
+			modalImgOpen.style.display = 'none';
+		};
+	});
+
+	// Popup после 60 сек
+
+	setTimeout(function () {
+		popup.style.display = 'block';
+	}, 60000);
 });
